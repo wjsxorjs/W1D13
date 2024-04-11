@@ -13,35 +13,34 @@ public class Main_Ex4 {
 		String path = "C:/My_Study/io_test.txt";
 		File f = new File(path);
 		
-		ArrayList<DataVO> list = new ArrayList<>();
-		
 		ObjectInputStream ois = null;
+		
 		try {
 			ois = new ObjectInputStream(new FileInputStream(f));
-			Object obj = ois.readObject();
+			// 준비된 파일로부터 객체 1개 읽기
+			Object obj = ois.readObject(); // 읽을 때는 readObject
 			
 			if(obj instanceof ArrayList) {
-				list = (ArrayList<DataVO>) obj;
-			}
-			
-			for(int i=0; i<list.size();i++) {
-				DataVO vo = list.get(i);
+				ArrayList<DataVO> list = (ArrayList<DataVO>) obj;
 				
-				System.out.printf("Name: %s || Value: %d\r\n",vo.getName(),vo.getValue());
-				
+				for(int i=0; i<list.size();i++) {
+					DataVO vo = list.get(i);
+					
+					System.out.printf("Name: %s || Value: %d\r\n",vo.getName(),vo.getValue());
+					
+				} // for의 끝
+				System.out.println("\r\n---------- 끝 ----------");
 			}
-			
-			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		} finally {
 			try {
 				if(ois != null) {
 					ois.close();
 				}
-			} catch (Exception e2) {
-				// TODO: handle exception
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		

@@ -16,16 +16,21 @@ public class Main_Ex3 {
 		DataVO vo2 = new DataVO();
 		vo2.setName("BBB");
 		vo2.setValue(222);
-		
+
 		DataVO vo3 = new DataVO();
 		vo3.setName("CCC");
 		vo3.setValue(333);
+		
+		DataVO vo4 = new DataVO();
+		vo4.setName("DDD");
+		vo4.setValue(444);
 		
 		//ArrayList 준비
 		ArrayList<DataVO> list = new ArrayList<DataVO>();
 		list.add(vo1);
 		list.add(vo2);
 		list.add(vo3);
+		list.add(vo4);
 		
 		//저장할 파일을 준비
 		
@@ -39,7 +44,7 @@ public class Main_Ex3 {
 			oos = new ObjectOutputStream(new FileOutputStream(f));
 			
 			// 객체 저장
-			oos.writeObject(list);
+			oos.writeObject(list); // 쓸 때는 writeObject
 			oos.flush();
 			System.out.println("저장 완료");
 			
