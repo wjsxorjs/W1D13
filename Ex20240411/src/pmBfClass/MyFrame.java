@@ -107,6 +107,7 @@ public class MyFrame extends JFrame {
 				try {
 					bw = new BufferedOutputStream(new FileOutputStream(f));
 					bw.write(textArea.getText().getBytes());
+					bw.flush();
 					
 				} catch (Exception e2) {
 				} finally {

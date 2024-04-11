@@ -46,6 +46,40 @@ public class MyFrame_Ex6 extends JFrame {
 		});
 	}
 
+	private void saveData() {
+		//바로 저장하기
+		BufferedWriter bw = null;
+		try {
+			bw = new BufferedWriter(new PrintWriter(f));
+			
+			// 저장할 자원은 JTextArea에 있는 문자열들이다.
+			String str = textArea.getText();
+			bw.write(str);
+			bw.flush();
+			this.setTitle(f.getAbsolutePath());
+			
+		}catch (Exception e1) {}
+		finally {
+			try {
+				if(bw != null) {
+					bw.close();
+				}
+			} catch (Exception e2) {}
+		}
+	}
+	
+	private void saveFile() {
+		// 파일선택기 생성
+		JFileChooser jfc = new JFileChooser("C:/My_Study");
+		
+		int cmd = jfc.showSaveDialog(MyFrame_Ex6.this);
+		
+		if(cmd == JFileChooser.APPROVE_OPTION) {
+			f = jfc.getSelectedFile();
+			saveData();
+		}
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -72,6 +106,19 @@ public class MyFrame_Ex6 extends JFrame {
 		mnNewMenu.add(separator_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Save");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// 파일이 이미 열려있는 상태라면 그대로 저장한다.
+				// 그렇지 않을때만 파일 선택기를 생성하고 보여준다.
+
+				if(f != null) {
+					saveData();
+				} else {
+					saveFile();
+				}
+				
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JSeparator separator_2 = new JSeparator();
@@ -117,6 +164,7 @@ public class MyFrame_Ex6 extends JFrame {
 					try {
 						br = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
 						String str = null;
+						textArea.setText("");
 						while((str = br.readLine())!=null) {
 //							sb.append(str);
 //							sb.append("\r\n");

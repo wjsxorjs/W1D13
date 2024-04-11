@@ -103,8 +103,8 @@ public class MyFrame2 extends JFrame {
 				
 				try {
 					bw = new BufferedWriter(new PrintWriter(f));
-					String str = null;
 					bw.write(textArea.getText());
+					bw.flush();
 					
 				} catch (Exception e2) {
 				} finally {
